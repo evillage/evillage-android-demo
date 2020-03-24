@@ -10,10 +10,10 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import nl.evillage.NotificationClickedActivity
 import nl.evillage.clangnotifications.Clang
 import nl.evillage.clangnotifications.R
-import nl.evillage.clangnotifications.data.model.KeyValue
+import nl.evillage.clangnotifications.data.model.ClangKeyValue
+import nl.evillage.ui.NotificationClickedActivity
 import kotlin.random.Random
 
 open class ClangFirebaseMessagingService : FirebaseMessagingService() {
@@ -40,13 +40,8 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
 
         intent.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            val list = arrayListOf<KeyValue>().apply {
-                data.keys.forEach { add(
-                    KeyValue(
-                        it,
-                        data[it] ?: ""
-                    )
-                ) }
+            val list = arrayListOf<ClangKeyValue>().apply {
+                data.keys.forEach { add(ClangKeyValue(it, data[it] ?: "")) }
             }
             putExtra("keyValue", list)
         }
@@ -115,13 +110,7 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String?) {
         token?.let { fbToken ->
-            clang = Clang.getInstance(
-                "https://94fd32f3.ngrok.io",
-                applicationContext,
-                "46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5",
-                "63f4bf70-2a0d-4eb2-b35a-531da0a61b20"
-            )
-
+            clang = Clang.getInstance(applicationContext,"46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5", "63f4bf70-2a0d-4eb2-b35a-531da0a61b20")
             clang.updateToken(fbToken,
                 {
                     Log.d("TAG", "Refreshed token: $fbToken")

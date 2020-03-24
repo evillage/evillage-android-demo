@@ -7,6 +7,9 @@ App is written in Kotlin, uses Retrofit2 for http calls and Firebase cloud messa
 
 * clone this repository and open it in AndroidStudio (can be downloaded from [here](https://developer.android.com/studio))
 * Run on a virtual device or connect Android phone with Android version 5.0 or higher
+* Add the following credentials to your global gradle.properties file, these credentials are needed to download the Clang library from Jitpack:
+    * username
+    * authToken
 
 ### Links ###
 
