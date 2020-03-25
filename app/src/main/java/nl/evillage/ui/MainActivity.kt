@@ -3,7 +3,7 @@ package nl.evillage.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import nl.evillage.R
-import nl.evillage.clangnotifications.Clang
+import nl.worth.clangnotifications.Clang
 
 class MainActivity : AppCompatActivity() {
 

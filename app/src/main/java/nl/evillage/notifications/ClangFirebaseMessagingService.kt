@@ -10,10 +10,10 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import nl.evillage.clangnotifications.Clang
-import nl.evillage.clangnotifications.R
-import nl.evillage.clangnotifications.data.model.ClangKeyValue
+import nl.evillage.R
 import nl.evillage.ui.NotificationClickedActivity
+import nl.worth.clangnotifications.Clang
+import nl.worth.clangnotifications.data.model.ClangKeyValue
 import kotlin.random.Random
 
 open class ClangFirebaseMessagingService : FirebaseMessagingService() {

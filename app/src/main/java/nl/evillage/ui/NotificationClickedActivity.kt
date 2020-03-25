@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import nl.evillage.clangnotifications.Clang
-import nl.evillage.clangnotifications.R
-import nl.evillage.clangnotifications.data.model.ClangKeyValue
+import nl.worth.clangnotifications.Clang
+import nl.worth.clangnotifications.R
+import nl.worth.clangnotifications.data.model.ClangKeyValue
 
 internal class NotificationClickedActivity : AppCompatActivity() {
 

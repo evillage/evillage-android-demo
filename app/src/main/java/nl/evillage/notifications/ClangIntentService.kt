@@ -4,7 +4,7 @@ import android.app.IntentService
 import android.content.Intent
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
-import nl.evillage.clangnotifications.Clang
+import nl.worth.clangnotifications.Clang
 
 internal class ClangIntentService : IntentService("ClangIntentService") {
     lateinit var clang : Clang
