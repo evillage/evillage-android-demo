@@ -4,18 +4,13 @@ import android.app.IntentService
 import android.content.Intent
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
-import nl.evillage.clangnotifications.Clang
+import nl.worth.clangnotifications.Clang
 
 internal class ClangIntentService : IntentService("ClangIntentService") {
     lateinit var clang : Clang
 
     override fun onHandleIntent(intent: Intent?) {
-        clang = Clang.getInstance(
-            "https://94fd32f3.ngrok.io",
-            applicationContext,
-            "46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5",
-            "63f4bf70-2a0d-4eb2-b35a-531da0a61b20"
-        )
+        clang = Clang.getInstance(applicationContext,"46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5", "63f4bf70-2a0d-4eb2-b35a-531da0a61b20")
 
         val actionId = intent?.getStringExtra("actionId")
         val notificationId = intent?.getStringExtra("notificationId")
