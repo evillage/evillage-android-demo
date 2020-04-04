@@ -6,7 +6,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         // NOTE: Do not place your application dependencies here; they belong
@@ -25,7 +25,6 @@ allprojects {
         jcenter()
         maven {
             url 'https://jitpack.io'
-            credentials { username authToken }
         }
     }
 }
