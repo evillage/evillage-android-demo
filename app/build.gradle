@@ -8,7 +8,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "nl.worth"
+        applicationId "cloud.clang.pushdemo"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
