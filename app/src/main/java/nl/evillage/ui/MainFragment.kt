@@ -41,7 +41,7 @@ class MainFragment : Fragment() {
         // UNIQUE DEVICE IDENTIFIER: prefer to use AdvertisingId
         val deviceId: String = Secure.ANDROID_ID
         mainActivity.clang.createAccount(deviceId, {
-            Toast.makeText(requireContext(), view.id, Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), it.id, Toast.LENGTH_LONG).show()
         }, {
             Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
         })
