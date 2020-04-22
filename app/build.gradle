@@ -14,10 +14,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField "String", "clangBaseUrl", '"https://94fd32f3.ngrok.io"'
-        buildConfigField "String", "clangAuthenticationToken", '"46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5"'
-        buildConfigField "String", "clangIntegrationId", '"63f4bf70-2a0d-4eb2-b35a-531da0a61b20"'
     }
 
     buildTypes {
@@ -34,8 +30,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.constraintlayout:constraintlayout:1.1.3"
-    implementation 'com.google.firebase:firebase-messaging:19.0.1'
-    implementation 'com.github.evillage:evillage-android:v0.0.4'
+    implementation 'com.google.firebase:firebase-messaging:20.1.5'
+    implementation 'com.github.evillage:evillage-android:v0.0.9'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
@@ -43,4 +40,3 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }
-
