@@ -13,37 +13,30 @@ import com.google.firebase.messaging.RemoteMessage
 import nl.evillage.R
 import nl.evillage.ui.NotificationClickedActivity
 import nl.worth.clangnotifications.Clang
-import nl.worth.clangnotifications.data.model.ClangKeyValue
+import nl.worth.clangnotifications.data.model.ClangNotification
 import kotlin.random.Random
 
-open class ClangFirebaseMessagingService : FirebaseMessagingService() {
-    lateinit var clang: Clang
 
-    override fun onMessageReceived(p0: RemoteMessage) {
-        p0.data.let { data ->
-            when (data["type"]) {
-                "clang" -> {
-                    if (handleClangNotification(data)) return
-                }
-                else -> super.onMessageReceived(p0)
-            }
+open class ClangFirebaseMessagingService : FirebaseMessagingService() {
+
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+
+        if (ClangNotification.isClangNotification(remoteMessage)) {
+            handleClangNotification(ClangNotification(remoteMessage))
+        } else {
+            super.onMessageReceived(remoteMessage)
         }
-        super.onMessageReceived(p0)
     }
 
-    private fun handleClangNotification(data: Map<String, String>): Boolean {
+    private fun handleClangNotification(clangNotification: ClangNotification): Boolean {
         val systemNotificationId = Random.nextInt(0, Int.MAX_VALUE)
-        val productTitle = data["notificationTitle"]
-        val productContent = data["notificationBody"]
+        val productTitle = clangNotification.title
+        val productContent = clangNotification.message
 
         val intent = Intent(this, NotificationClickedActivity::class.java)
 
         intent.apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            val list = arrayListOf<ClangKeyValue>().apply {
-                data.keys.forEach { add(ClangKeyValue(it, data[it] ?: "")) }
-            }
-            putExtra("keyValue", list)
+            putExtra("clangNotification", clangNotification)
         }
         val pendingIntent: PendingIntent =
             PendingIntent.getActivity(
@@ -67,14 +60,14 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         val builder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.notification_icon)
+            .setSmallIcon(R.drawable.ic_error)
             .setContentTitle(productTitle)
             .setContentText(productContent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
-        addActions(data, builder, systemNotificationId)
+        addActions(clangNotification, builder, systemNotificationId)
 
         with(NotificationManagerCompat.from(this)) {
             notify(systemNotificationId, builder.build())
@@ -84,48 +77,35 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun addActions(
-        data: Map<String, String>,
+        clangNotification: ClangNotification,
         notificationBuilder: NotificationCompat.Builder,
         systemNotificationId: Int
     ) {
-        val notId = data["notificationId"]
-        for (i in 1..3) {
-            val actionId = data["action${i}Id"]
-            val actionTitle = data["action${i}Title"]
+        clangNotification.actions.forEach {
+            val pendingIntent = PendingIntent.getService(
+                this, Random.nextInt(0, Int.MAX_VALUE),
+                Intent(this, ClangIntentService::class.java).apply {
+                    this.putExtra("notificationId", clangNotification.id)
+                    this.putExtra("actionId", it.id)
+                    this.putExtra("systemNotificationId", systemNotificationId)
+                }, PendingIntent.FLAG_UPDATE_CURRENT
+            )
 
-            actionId?.let {
-                actionTitle.let {
-                    val pendingIntent = PendingIntent.getService(
-                        this, Random.nextInt(0, Int.MAX_VALUE) + i,
-                        Intent(this, ClangIntentService::class.java).apply {
-                            this.putExtra("notificationId", notId)
-                            this.putExtra("actionId", actionId)
-                            this.putExtra("systemNotificationId", systemNotificationId)
-                        }, PendingIntent.FLAG_UPDATE_CURRENT
-                    )
-
-                    notificationBuilder.addAction(
-                        android.R.drawable.ic_notification_overlay,
-                        actionTitle,
-                        pendingIntent
-                    )
-                }
-            }
+            notificationBuilder.addAction(
+                android.R.drawable.ic_notification_overlay,
+                it.title,
+                pendingIntent
+            )
         }
     }
 
     override fun onNewToken(token: String) {
-        clang = Clang.getInstance(
-            applicationContext,
-            "46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5",
-            "63f4bf70-2a0d-4eb2-b35a-531da0a61b20"
-        )
-        clang.updateToken(token,
+        Clang.getInstance().updateToken(token,
             {
                 Log.d("TAG", "Refreshed token: $token")
             },
             {
-                Log.d("TAG", "failed to update token")
+                Log.d("TAG", "Failed to update token")
             }
         )
 

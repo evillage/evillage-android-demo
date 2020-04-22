@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_poll.*
 import nl.evillage.ui.MainActivity
@@ -22,7 +23,7 @@ class PollFragment : Fragment() {
         requireActivity() as MainActivity
     }
 
-    private lateinit var answer: String
+    private var answer: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,12 +46,18 @@ class PollFragment : Fragment() {
     }
 
     private var submitClickListener = View.OnClickListener {
-        btn_submit.isEnabled = false
-        mainActivity.clang.logEvent("pollSubmit", mapOf("title" to "FavoriteCarColor", "value" to answer), {
-            showAlertDialog()
-        }, {
-            showAlertDialog(it)
-        })
+        answer?.let { _answer ->
+            btn_submit.isEnabled = false
+            mainActivity.clang.logEvent(
+                "pollSubmit",
+                mapOf("title" to "FavoriteCarColor", "value" to _answer),
+                {
+                    showAlertDialog()
+                },
+                {
+                    showAlertDialog(it)
+                })
+        } ?: Toast.makeText(requireContext(), "Please select a color", Toast.LENGTH_SHORT).show()
     }
 
     private fun showAlertDialog(throwable: Throwable? = null) {
@@ -64,7 +71,7 @@ class PollFragment : Fragment() {
         } else {
             builder.setTitle("Success")
             builder.setMessage("Favorite car color submitted")
-            builder.setPositiveButton(android.R.string.ok) {_, _ ->
+            builder.setPositiveButton(android.R.string.ok) { _, _ ->
                 findNavController().navigateUp()
             }
         }
