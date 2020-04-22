@@ -2,6 +2,8 @@ package nl.evillage.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import com.google.firebase.iid.FirebaseInstanceId
 import nl.evillage.R
 import nl.worth.clangnotifications.Clang
 
@@ -12,6 +14,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        clang = Clang.getInstance(applicationContext,"46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5", "63f4bf70-2a0d-4eb2-b35a-531da0a61b20")
+        clang = Clang.getInstance()
+
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
+            if (!it.isSuccessful) {
+                Log.w("FCM_TOKEN", "getInstanceId failed", it.exception)
+            }
+
+            // Get new Instance ID token
+            val token = it.result?.token ?: "FCM not defined"
+
+            // Log and toast
+            Log.d("FCM_TOKEN", token)
+        }
     }
 }

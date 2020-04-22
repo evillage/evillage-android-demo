@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import nl.evillage.R
 import nl.worth.clangnotifications.Clang
-import nl.worth.clangnotifications.R
-import nl.worth.clangnotifications.data.model.ClangKeyValue
+import nl.worth.clangnotifications.data.model.ClangNotification
 
 internal class NotificationClickedActivity : AppCompatActivity() {
 
@@ -16,7 +16,9 @@ internal class NotificationClickedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_clang)
+        setContentView(
+            R.layout.activity_detailed_message
+        )
 
         val title = findViewById<TextView>(R.id.title)
         val description = findViewById<TextView>(R.id.description)
@@ -24,52 +26,49 @@ internal class NotificationClickedActivity : AppCompatActivity() {
         val action2Btn = findViewById<Button>(R.id.action2)
         val action3Btn = findViewById<Button>(R.id.action3)
 
-        val clangKeyValue: ArrayList<ClangKeyValue> = intent.getParcelableArrayListExtra("keyValue")
+        val clangNotification: ClangNotification = intent.getSerializableExtra("clangNotification") as ClangNotification
 
-        title.text = clangKeyValue.find { it.key == "notificationTitle" }?.value
-        description.text = clangKeyValue.find { it.key == "notificationBody" }?.value
-        action1Btn.text = clangKeyValue.find { it.key == "action1Title" }?.value
-        action2Btn.text = clangKeyValue.find { it.key == "action2Title" }?.value
-        action3Btn.text = clangKeyValue.find { it.key == "action3Title" }?.value
+        title.text = clangNotification.title
+        description.text = clangNotification.message
+        action1Btn.text = clangNotification.actions[0].title
+        action2Btn.text = clangNotification.actions[1].title
+        action3Btn.text = clangNotification.actions[2].title
 
-        val notificationId = clangKeyValue.find { it.key == "notificationId" }?.value
+        val notificationId = clangNotification.id
         notificationId?.let {
             action1Btn.apply {
                 setOnClickListener {
-                    onActionClick(clangKeyValue, notificationId, "action1Id")
+                    onActionClick(clangNotification.actions[0].id, notificationId)
                 }
             }
             action2Btn.apply {
                 setOnClickListener {
-                    onActionClick(clangKeyValue, notificationId, "action2Id")
+                    onActionClick(clangNotification.actions[1].id, notificationId)
                 }
             }
             action3Btn.apply {
                 setOnClickListener {
-                    onActionClick(clangKeyValue, notificationId, "action3Id")
+                    onActionClick(clangNotification.actions[2].id, notificationId)
                 }
             }
         }
 
-        clang = Clang.getInstance(applicationContext,"46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5", "63f4bf70-2a0d-4eb2-b35a-531da0a61b20")
+        clang = Clang.getInstance()
     }
 
     private fun onActionClick(
-        clangKeyValue: ArrayList<ClangKeyValue>,
-        notificationId: String,
-        actionKey: String
+        id: String,
+        notificationId: String
     ) {
-        clangKeyValue.find { it.key == actionKey }?.value?.let {
-            sendAction(it, notificationId)
-        }
+        sendAction(id, notificationId)
         finish()
     }
 
     private fun sendAction(actionId: String, notificationId: String) {
         clang.logNotificationAction(actionId, notificationId, {
-
+            Toast.makeText(this, "Logged action with id: $actionId", Toast.LENGTH_SHORT).show()
         }, {
-            Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
         })
     }
 }
