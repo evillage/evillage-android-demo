@@ -1,9 +1,9 @@
 {
   "project_info": {
-    "project_number": "252993193459",
-    "firebase_url": "https://clang-push-gateway-a5983.firebaseio.com",
-    "project_id": "clang-push-gateway-a5983",
-    "storage_bucket": "clang-push-gateway-a5983.appspot.com"
+    "project_number": "5396010653",
+    "firebase_url": "https://mokup-1cb6c.firebaseio.com",
+    "project_id": "mokup-1cb6c",
+    "storage_bucket": "mokup-1cb6c.appspot.com"
   },
   "client": [
     {
@@ -15,20 +15,20 @@
       },
       "oauth_client": [
         {
-          "client_id": "252993193459-jomtond1l33hnaebvgkkbiabadiqr6qb.apps.googleusercontent.com",
+          "client_id": "5396010653-aohp916le9q6ip4ng24o49ovh4cum2i2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAXUhrz4Bha7tdMnUR0BuLXcA63DojikK8"
+          "current_key": "AIzaSyBkyQl4nSHgrkJq-xKsfN1iZs3NO465VI4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "252993193459-jomtond1l33hnaebvgkkbiabadiqr6qb.apps.googleusercontent.com",
+              "client_id": "5396010653-aohp916le9q6ip4ng24o49ovh4cum2i2.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
