@@ -6,6 +6,16 @@
         android:gravity="center"
         android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/cp_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="top"
+        android:layout_weight="1"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        android:tag="cp_Layout">
+
     <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -35,5 +45,13 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="@string/property" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_callticket"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ticket" />
+
+</LinearLayout>
 
 </LinearLayout>
