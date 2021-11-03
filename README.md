@@ -1,5 +1,5 @@
-# e-Village - Android Clang Demo
-This app is the demo app of the Clang Android library. It shows a simple UI to demo the uses of the Clang library. For the library see: https://github.com/evillage/evillage-android
+# TeamITG - Android CanopyDeploy Demo
+This app is the demo app of the CanopyDeploy Android library. It shows a simple UI to demo the uses of the CanopyDeploy library. For the library see: https://github.com/evillage/evillage-android
 
 In this demo setup we used jitpack.io as the source for the library package.
 

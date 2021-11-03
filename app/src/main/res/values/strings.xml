@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EvillageDemoApp</string>
+    <string name="app_name">CanopyDeployDemoApp</string>
     <string name="default_fcm_channel_id">channel-01</string>
     <string name="ticket">ticket</string>
     <string name="main_text">Choose wisely the needed button</string>
