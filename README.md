@@ -11,23 +11,23 @@ In this demo setup we used jitpack.io as the source for the library package.
 
 * please look at the App.java where we make acces to the MainActivity and MainFragment for use and future possible use
 
-    private MainActivity mCurrentActivity = null;
-    private MainFragment mCurrentFragment = null;
+        private MainActivity mCurrentActivity = null;
+        private MainFragment mCurrentFragment = null;
     
-    public MainActivity getCurrentActivity () {
-        return mCurrentActivity;
-    }
-    public void setCurrentActivity (MainActivity mCurrentActivity) {
-        this . mCurrentActivity = mCurrentActivity;
-    }
+        public MainActivity getCurrentActivity () {
+             return mCurrentActivity;
+         }
+        public void setCurrentActivity (MainActivity mCurrentActivity) {
+            this . mCurrentActivity = mCurrentActivity;
+         }
 
-    //addd for acces to MainFragment
-    public MainFragment getCurrentFragment () {
-        return mCurrentFragment;
-    }
-    public void setCurrentFragment (MainFragment mCurrentFragment) {
-        this.mCurrentFragment = mCurrentFragment;
-    }
+     //addd for acces to MainFragment
+        public MainFragment getCurrentFragment () {
+            return mCurrentFragment;
+     }
+        public void setCurrentFragment (MainFragment mCurrentFragment) {
+            this.mCurrentFragment = mCurrentFragment;
+        }
     
 * and in MainActivity setting the currentActivity in onCreate
 
