@@ -117,20 +117,20 @@ In this demo setup we used jitpack.io as the source for the library package.
     
 * in ClangFirebaseMessagingService in onMessageReceived look at the connection between ClangFirebaseMessagingService the currentFragment in App
 
-  if (remoteMessage.data.keys.contains("cd_payload")) {
+    if (remoteMessage.data.keys.contains("cd_payload")) {
             val mFragment: MainFragment = (applicationContext as App).currentFragment
             mFragment.callTicket(remoteMessage.data["cd_payload"].toString())
-        }
+         }
  
  
 * then the final callTicket and its handling of the payload
 
-    open fun callTicket(payload : String) {
-        val mainConstraintLayout = this.layoutInflater.inflate(nl.evillage.R.layout.fragment_main, null) as ConstraintLayout
-        Handler(Looper.getMainLooper()).post(Runnable { //do stuff like remove view etc
-            Functions.buildTheTickets(parent = mainActivity, toAdd = payload, mainConstraintLayout)
-        })
+        open fun callTicket(payload : String) {
+          val mainConstraintLayout = this.layoutInflater.inflate(nl.evillage.R.layout.fragment_main, null) as ConstraintLayout
+         Handler(Looper.getMainLooper()).post(Runnable { //do stuff like remove view etc
+                Functions.buildTheTickets(parent = mainActivity, toAdd = payload, mainConstraintLayout)
+         })
 
-    }
+        }
 
         
