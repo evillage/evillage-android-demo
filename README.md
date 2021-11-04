@@ -70,44 +70,7 @@ In this demo setup we used jitpack.io as the source for the library package.
             android:orientation="vertical">
 
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/mainText"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="@string/main_text"
-                android:textSize="20sp" />
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_register"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="@string/register" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_login"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="@string/login" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_poll"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="@string/poll" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_property"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="@string/property" />
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_callticket"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="@string/ticket" />
+            <androidx (all items inside this layout) />
 
         </LinearLayout>
 
