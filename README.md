@@ -114,7 +114,7 @@ In this demo setup we used jitpack.io as the source for the library package.
 
     </LinearLayout>
     
-* in ClangFirebaseMessagingService in onMessageReceived look at the connection between ClangFirebaseMessagingService the currentFragment in App
+* in ClangFirebaseMessagingService in onMessageReceived look at the connection between ClangFirebaseMessagingService and the currentFragment in App
 
                 if (remoteMessage.data.keys.contains("cd_payload")) {
                         val mFragment: MainFragment = (applicationContext as App).currentFragment
