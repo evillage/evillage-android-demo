@@ -22,9 +22,9 @@ In this demo setup we used jitpack.io as the source for the library package.
          }
 
      //addd for acces to MainFragment
-        public MainFragment getCurrentFragment () {
-            return mCurrentFragment;
-     }
+                public MainFragment getCurrentFragment () {
+                        return mCurrentFragment;
+                }
         public void setCurrentFragment (MainFragment mCurrentFragment) {
             this.mCurrentFragment = mCurrentFragment;
         }
