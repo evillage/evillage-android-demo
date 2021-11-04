@@ -31,21 +31,21 @@ In this demo setup we used jitpack.io as the source for the library package.
     
 * and in MainActivity setting the currentActivity in onCreate
 
-    var mMyApp: App? = null
+        var mMyApp: App? = null
     
     (in onCreate)
     
-         mMyApp = this.applicationContext as App
-         mMyApp?.currentActivity = this
+              mMyApp = this.applicationContext as App
+              mMyApp?.currentActivity = this
          
  * and in MainFragment setting the MainFragment in onViewCreated
 
-      var mMyApp: App? = null
+        var mMyApp: App? = null
       
           (in onViewCreated)
           
-       mMyApp = mainActivity.applicationContext as App
-       mMyApp?.currentFragment = this
+                mMyApp = mainActivity.applicationContext as App
+                mMyApp?.currentFragment = this
        
 * then look at the fragment_main.xml where a LinearLayout is added to the content of the view to make suren the id="@+id/cp_Layout" can be found an filled
 
