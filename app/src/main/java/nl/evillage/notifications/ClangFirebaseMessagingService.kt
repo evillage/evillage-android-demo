@@ -1,25 +1,46 @@
 package nl.evillage.notifications
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import nl.evillage.R
 import nl.evillage.ui.notification.NotificationClickedActivity
+import nl.evillage.views.Functions
 import nl.worth.clangnotifications.Clang
 import nl.worth.clangnotifications.data.model.ClangNotification
 import kotlin.random.Random
+import nl.evillage.App
+import kotlinx.android.synthetic.main.fragment_main.*
+import androidx.fragment.app.Fragment
+import android.app.ActivityManager
+import android.app.PendingIntent
+import android.app.PendingIntent.getActivity
+import android.widget.Toast
+import androidx.core.app.ActivityCompat.startActivityForResult
+
+import android.os.Bundle
+
+import android.content.ComponentName
+import nl.evillage.ui.MainActivity
+import android.app.Activity
+import nl.evillage.ui.MainFragment
 
 
 open class ClangFirebaseMessagingService : FirebaseMessagingService() {
 
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
+
+        if (remoteMessage.data.keys.contains("cd_payload")) {
+            val mFragment: MainFragment = (applicationContext as App).currentFragment
+            mFragment.callTicket(remoteMessage.data["cd_payload"].toString())
+        }
 
         if (ClangNotification.isClangNotification(remoteMessage)) {
             handleClangNotification(ClangNotification(remoteMessage))
@@ -33,7 +54,7 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
         val productTitle = clangNotification.title
         val productContent = clangNotification.message
 
-        val intent = Intent(this, NotificationClickedActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
 
         intent.apply {
             putExtra("clangNotification", clangNotification)
