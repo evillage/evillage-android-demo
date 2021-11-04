@@ -5,25 +5,31 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import androidx.core.content.ContentProviderCompat.requireContext
-import com.google.firebase.iid.FirebaseInstanceId
-import com.google.firebase.iid.InstanceIdResult
 import com.google.firebase.messaging.FirebaseMessaging
 
 import nl.evillage.R
+import nl.evillage.notifications.ClangFirebaseMessagingService
 import nl.worth.clangnotifications.Clang
+import android.app.Activity
+import androidx.constraintlayout.widget.ConstraintLayout
+import nl.evillage.App
+import nl.evillage.views.Functions
+
 
 class MainActivity : AppCompatActivity() {
 
+    var mMyApp: App? = null
     lateinit var clang: Clang
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         clang = Clang.getInstance()
+         mMyApp = this.applicationContext as App
+         mMyApp?.currentActivity = this
 
 
-
-        FirebaseMessaging.getInstance().token.addOnSuccessListener { result ->
+         FirebaseMessaging.getInstance().token.addOnSuccessListener { result ->
             if(result != null){
                 var fbToken = result
                 //clang.updateToken(fbToken, null, null)
@@ -33,6 +39,10 @@ class MainActivity : AppCompatActivity() {
                 // DO your thing with your firebase token
             }
         }
+
+
+
+
 
         /*
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
@@ -48,5 +58,9 @@ class MainActivity : AppCompatActivity() {
         }
 
          */
+
     }
+
+
+
 }
