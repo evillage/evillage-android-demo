@@ -25,6 +25,7 @@ public class App extends Application {
         this . mCurrentActivity = mCurrentActivity;
     }
 
+    //addd for acces to MainFragment
     public MainFragment getCurrentFragment () {
         return mCurrentFragment;
     }

@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import androidx.core.content.ContentProviderCompat.requireContext
-import com.google.firebase.iid.FirebaseInstanceId
-import com.google.firebase.iid.InstanceIdResult
 import com.google.firebase.messaging.FirebaseMessaging
 
 import nl.evillage.R
