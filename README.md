@@ -117,10 +117,10 @@ In this demo setup we used jitpack.io as the source for the library package.
     
 * in ClangFirebaseMessagingService in onMessageReceived look at the connection between ClangFirebaseMessagingService the currentFragment in App
 
-     if (remoteMessage.data.keys.contains("cd_payload")) {
-                val mFragment: MainFragment = (applicationContext as App).currentFragment
-             mFragment.callTicket(remoteMessage.data["cd_payload"].toString())
-            }
+                if (remoteMessage.data.keys.contains("cd_payload")) {
+                        val mFragment: MainFragment = (applicationContext as App).currentFragment
+                        mFragment.callTicket(remoteMessage.data["cd_payload"].toString())
+                 }
  
  
 * then the final callTicket and its handling of the payload
