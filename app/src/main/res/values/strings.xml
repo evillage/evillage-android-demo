@@ -16,4 +16,6 @@
     <string name="email_hint">Enter email</string>
     <string name="submit">Submit</string>
     <string name="saved_id_key">saved_id_key</string>
+    <string name="notification_channel_name">test 1</string>
+    <string name="notification_channel_description">test 2</string>
 </resources>

@@ -1,32 +1,38 @@
 package nl.evillage.ui
 
+import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
+import android.os.Looper
+import android.provider.Settings.Secure
+import android.service.notification.StatusBarNotification
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.provider.Settings.Secure
-import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_main.*
 import nl.evillage.App
 import nl.evillage.R
 import nl.evillage.views.Functions
-import android.os.Looper
-
-
-
-
-
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class MainFragment : Fragment() {
+class MainFragment : Fragment()  {
+
     var mMyApp: App? = null
     private val mainActivity: MainActivity by lazy {
         requireActivity() as MainActivity
@@ -36,6 +42,8 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
 
 
         return inflater.inflate(R.layout.fragment_main, container, false)
@@ -61,8 +69,9 @@ class MainFragment : Fragment() {
 
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
         mMyApp = mainActivity.applicationContext as App
         mMyApp?.currentFragment = this
 
@@ -71,7 +80,16 @@ class MainFragment : Fragment() {
         btn_poll.setOnClickListener(pollClickListener)
         btn_property.setOnClickListener(propertyClickistener)
         btn_callticket.setOnClickListener(ticketClickListener)
+
+
+
+
+
+
+        super.onViewCreated(view, savedInstanceState)
     }
+
+
 
     private var registerClickListener = View.OnClickListener { view ->
         // UNIQUE DEVICE IDENTIFIER: prefer to use AdvertisingId
