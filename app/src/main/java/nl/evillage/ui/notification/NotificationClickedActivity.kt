@@ -2,6 +2,7 @@ package nl.evillage.ui.notification
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -35,6 +36,9 @@ internal class NotificationClickedActivity : AppCompatActivity(),
         title.text = clangNotification.title
         description.text = clangNotification.message
         notificationId = clangNotification.id
+
+        Log.d("tag", "Message Notification Title:" + clangNotification.title )
+        Log.d("tag", "Message Notification Title:" + clangNotification.message )
 
         if(clangNotification.actions.isEmpty()){
             val doneButton = findViewById<Button>(R.id.btn_done)
